@@ -1,4 +1,6 @@
 using myfinance_web_dotnet_infra;
+using myfinance_web_dotnet_infra.Interfaces;
+using myfinance_web_dotnet_infra.Repositories;
 using myfinance_web_dotnet_service;
 using myfinance_web_dotnet_service.Interfaces;
 
@@ -10,9 +12,12 @@ builder.Services.AddControllersWithViews();
 // Chamada da camada de infra para conexão com o DB
 builder.Services.AddDbContext<MyFinanceDBContext>();
 
-// Injeção dos serviços criados
+// Injeção de Services
 builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
 builder.Services.AddScoped<ITransacaoService, TransacaoService>();
+
+// Injeção de Repositories
+builder.Services.AddScoped<IPlanoContaRepository, PlanoContaRepository>();
 
 var app = builder.Build();
 
