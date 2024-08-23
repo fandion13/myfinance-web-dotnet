@@ -1,7 +1,18 @@
+using myfinance_web_dotnet_infra;
+using myfinance_web_dotnet_service;
+using myfinance_web_dotnet_service.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Chamada da camada de infra para conexão com o DB
+builder.Services.AddDbContext<MyFinanceDBContext>();
+
+// Injeção dos serviços criados
+builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
+builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
 var app = builder.Build();
 
